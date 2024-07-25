@@ -7,7 +7,7 @@ If you find this class helpful, and incorporate it into your projects please con
 https://www.paypal.com/donate/?hosted_button_id=5VNUTX8TYUXAL
 
 ## Requirements
-PHP >= 8.2
+PHP 8 >= 8.2.0
 
 ## Installation
 
@@ -15,7 +15,13 @@ To use this class, simply include the `db.class.php` file in your project.
 
 ## Usage
 
-To use the class, you first need to get the active instance, or create the instance of it using the `getInstance()` method. This will return a singleton instance of the class. Since this wrapper is a singleton, constructed in an object context, we cannot pass in the database information, so we create it, using a global dbConfig object. You can use a config class, or just create a stdClass object.
+To use the class, you first need to get the active instance, or create the instance of it using the `getInstance()` method. 
+
+This will return a singleton instance of the class. 
+
+Since this wrapper is a singleton, constructed in an object context, we cannot pass in the database information, so we create it, using a global dbConfig object. 
+
+You can use a config class, or just create a stdClass object.
 
 ```php
 $dbConfig = new stdClass();
@@ -23,6 +29,7 @@ $dbConfig->host = 'localhost';
 $dbConfig->username = 'username';
 $dbConfig->password = 'password'; 
 $dbConfig->name = 'mydbname';
+
 $db = db::getInstance();
 ```
 
@@ -41,7 +48,9 @@ $db->select("SELECT * FROM `users` WHERE `id` = ?;", array($unsafeUserId));
 
 ### Inserting Data
 
-To insert data into the database, you can use the `insert()` method. This method takes an SQL query and optional parameters, and returns the insert id to the new record.
+ `insert()` : To insert data into the database, you can use the insert method.
+ 
+ This method takes an SQL query and optional parameters, and returns the insert id to the new record.
 
 ```php
 $userId = $db->insert("INSERT INTO `users` (`name`, `email`) VALUES (?, ?)", array("John Doe", "john@example.com") );
