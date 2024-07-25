@@ -52,7 +52,7 @@ $userId = $db->insert("INSERT INTO `users` (`name`, `email`) VALUES (?, ?)", arr
 This class provides a couple of different ways to deal with selecting data from databases.
 Working with result sets, and shortcut operators, that allow us to just grab data directly passing your sql query.
 
-#### Selecting Single Values
+### Selecting Single Values
 Using mysqli without a wrapper requires several lines of code to be written. Im too lazy for that.
 Use the method below to grab a single value from the database.
 
@@ -60,7 +60,7 @@ Use the method below to grab a single value from the database.
 $userName = $db->getval("SELECT `name` FROM `users` WHERE `userId` = ''; ", array($userId));
 ```
 
-#### Selecting Single Rows
+### Selecting Single Rows
 This class allows you to grab a single row of data as either an assosiative array, or as an object,
 using the `getrow()` and `getobj()` methods respectivly.
 
@@ -73,7 +73,7 @@ $userObj = $db->getobject("SELECT * FROM users WHERE id = ?", array($userId));
 
 ```
 
-#### Selecting Number of Rows
+### Selecting Number of Rows
 Sometimes you just want to know how many rows exist for a query, without actually collecting an data.
 For this you can use the `num_rows` method.
 
@@ -83,7 +83,7 @@ $numRows = $db->num_rows("SELECT `id` FROM `users` WHERE `status` = 'active'; ")
 Typically you would use a COUNT() query, but there are some use cases for the above.
 
 
-#### Selecting Result Sets (Multiple Rows)
+### Selecting Result Sets (Multiple Rows)
 When you need to deal with working with multiple rows of results, you will use the result set methods.
 
 ```php
@@ -97,7 +97,7 @@ work with a prevoius result set, you just pass the result set into the method.
 
 We will show you how to work with the result set below.
 
-#### Getting the number of rows (Result Set)
+### Getting the number of rows (Result Set)
 To get the number of rows of a result set, the the `nr()` method.
 ```php
 //Using the most recent result set.
@@ -108,7 +108,7 @@ if($db->nr() > 0)
 if($dbo->nr($res) > 0)
 {}
 ```
-#### Getting the Row Data (Result Set)
+### Getting the Row Data (Result Set)
 To get the result set, you have a couple of different options
 To have results in an associate array, `use getassoc()` or `getArray($res,$type)`. Type should be 'ASSOC','NUM' or 'BOTH'.
 To have result in an object use `getobj()`.
