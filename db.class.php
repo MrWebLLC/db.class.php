@@ -1,22 +1,78 @@
 <?php
 class db
 {
+    /**
+     * The singleton instance of the class.
+     *
+     * @var self|null
+     */
     private static $instance = NULL;
+    /**
+     * The database connection.
+     *
+     * @var mysqli|null
+     */
     private $connection = NULL;
+    /**
+     * The log connection.
+     *
+     * @var mysqli|null
+     */
     private $logConn;
+    /**
+     * The ID of the last inserted row.
+     *
+     * @var int|null
+     */
     private $insertId;
+    /**
+     * The number of affected rows.
+     *
+     * @var int|null
+     */
     private $affectedRows;
+    /**
+     * The error message.
+     *
+     * @var string|null
+     */
     private $error;
+    /**
+     * The error code.
+     *
+     * @var int|null
+     */
     private $errorCode;
+    /**
+     * The error message.
+     *
+     * @var string|null
+     */
     private $errorMessage;
+    /**
+     * The stack trace of the error.
+     *
+     * @var string|null
+     */
     private $stackTrace;
-    private $errorNo;
-
-    private $lastError;
-
+    /**
+     * The result of the last executed query.
+     *
+     * @var mysqli_result|null
+     */
     private $result;
-    private $stmt;
+    /**
+     * The SQL query to be executed.
+     *
+     * @var string|null
+     */
     private $sql;
+
+    /**
+     * The parameters passed to the query to be used in prepared statement.
+     *
+     * @var array|null
+     */
     private $params;
     /**
      * Returns a singleton instance of the class.
@@ -36,7 +92,7 @@ class db
      *
      * Establishes a connection to a MySQL database using the global $dbConfig variable.
      * If the connection fails, sets the error information and returns.
-     * Sets the character set of the connection to 'utf8mb4'.
+     * If the charset is not passed in $dbConfig, Sets the character set of the connection to 'utf8mb4'.
      *
      * @return void
      */
@@ -49,7 +105,8 @@ class db
             $this->setError($e);
             return;
         }
-        $this->connection->set_charset('utf8mb4');
+        $charset = $dbConfig->charset ?? 'utf8mb4';
+        $this->connection->set_charset($charset);
     }
 
     /**
@@ -179,7 +236,7 @@ class db
             throw new Exception('Database selection failed: Cannot Connect to ' . $dbname);
     }
     /**
-     * Creates a new record in the database by executing an SQL query with optional parameters.
+     * Creates a new table in the database by executing an SQL query with optional parameters.
      *
      * @param string $sql The SQL query to execute.
      * @param array|null $params The parameters to bind to the query (optional).
@@ -189,7 +246,7 @@ class db
     {
         $sql = $this->validateSql($sql, __FUNCTION__);
         if (!$sql) {
-            $this->lastError = "Invalid SQL provided for the create command";
+            $this->error = "Invalid SQL provided for the create command";
             return false;
         }
         $this->sql = $sql;
@@ -211,7 +268,7 @@ class db
     {
         $sql = $this->validateSql($sql, __FUNCTION__);
         if (!$sql) {
-            $this->lastError = "Invalid SQL provided for the create command";
+            $this->error = "Invalid SQL provided for the drop command";
             return false;
         }
         $this->sql = $sql;
@@ -285,7 +342,7 @@ class db
      * @param string $type The type of array to retrieve. Defaults to 'BOTH'.
      * @return array|null The array of data from the result set, or null if no data is available.
      */
-    function getarray($res, $type = 'BOTH')
+    function getarray($res = '', $type = 'BOTH')
     {
         if ($res == '') $res = $this->result;
         return $res->fetch_array(constant('MYSQLI_' . $type));
