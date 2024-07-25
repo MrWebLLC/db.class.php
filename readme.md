@@ -225,9 +225,13 @@ $isClosed = $db->close();
 
 ### Additional Result Set Methods
 `seek($result, $offset)` : Sets the internal pointer of the result set to the specified offset.
+
 `numfields()` : Retrieves the number of fields in the given result set.
+
 `fieldtype($result, $index)` : Retrieves the type of the field at the specified index in the given result set.
+
 `fieldname($result, $index)` : Retrieves the name of a field from a result set at a specified index.
+
 `free()` : Frees the result set.
 
 
