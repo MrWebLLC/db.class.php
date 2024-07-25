@@ -6,6 +6,9 @@ This class provides a simple and easy-to-use, lazy interface for interacting wit
 If you find this class helpful, and incorporate it into your projects please consider donating to the cause.
 https://www.paypal.com/donate/?hosted_button_id=5VNUTX8TYUXAL
 
+## Requirements
+PHP >= 8.2
+
 ## Installation
 
 To use this class, simply include the `db.class.php` file in your project.
