@@ -49,6 +49,7 @@ $db->select("SELECT * FROM `users` WHERE `id` = ?;", array($unsafeUserId));
 ### Inserting Data
 
 To insert data into the database, you can use the insert method.
+ 
  `insert()` : This method takes an SQL query and optional parameters, and returns the insert id to the new record.
 
 ```php
@@ -73,6 +74,7 @@ $userName = $db->getval("SELECT `name` FROM `users` WHERE `userId` = ''; ", arra
 This class allows you to grab a single row of data as either an assosiative array, or as an object.
 
 `getrow()` : Return a row as an associative array
+
 `getobj()` : Return a row as an object
 
 ```php
@@ -126,7 +128,9 @@ if($dbo->nr($res) > 0)
 To get the result set, you have a couple of different options
 
 `getassoc()` : Returns an associative array from the result set
+
 `getArray($res,$type)` : Returns the result set as associative array, a numbered array, or both. Type should be 'ASSOC','NUM' or 'BOTH'.
+
 `getobj()` : Returns an object from the result set.
 
 ```php
