@@ -181,6 +181,7 @@ if(!$db->delete("DELETE FROM users WHERE id = ?", array($userId)))
 ### Creating Tables
 
 To add a new table into the database.
+
 `create()` :  This method takes an SQL query and returns a boolean indicating whether the creation was successful.
 
 ```php
