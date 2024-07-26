@@ -100,6 +100,8 @@ Typically you would use a COUNT() query, but there are some use cases for the ab
 ### Selecting Result Sets (Multiple Rows)
 When you need to deal with working with multiple rows of results, you will use the result set methods.
 
+`select()` : Performs a select query and returns a result set.
+
 ```php
 $sql = "SELECT * FROM users;";
 $result = $db->select($sql);
