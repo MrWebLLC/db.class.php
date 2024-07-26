@@ -168,10 +168,11 @@ if($db->update("UPDATE users SET name = ? WHERE id = ?", array("Jane Doe", 1)))
 ### Deleting Data
 
 To delete records from the database.
+
 `delete()` : This method takes an SQL query and optional parameters, and returns a boolean indicating whether the deletion was successful.
 
 ```php
-if(!$db->drop("DELETE FROM users WHERE id = ?", $userId))
+if(!$db->delete("DELETE FROM users WHERE id = ?", array($userId)))
 {
     echo "ERROR: Unable to remove user.";
 }
@@ -179,7 +180,8 @@ if(!$db->drop("DELETE FROM users WHERE id = ?", $userId))
 
 ### Creating Tables
 
-To add a new table into the database, you can use the `create()` method. This method takes an SQL query and returns a boolean indicating whether the creation was successful.
+To add a new table into the database.
+`create()` :  This method takes an SQL query and returns a boolean indicating whether the creation was successful.
 
 ```php
 $sql = "CREATE TABLE `users` (`id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `email` VARCHAR(255) NOT NULL , `status` VARCHAR(55) NOT NULL , PRIMARY KEY (`id`)) ENGINE = MyISAM; ";
@@ -189,7 +191,8 @@ $db->create($sql);
 ### Deleting Tables
 
 To delete tables from the database. 
-`drop()` : This method takes an SQL query and optional parameters, and returns a boolean indicating whether the deletion was successful.
+
+`drop()` : This method takes an SQL query, and returns a boolean indicating whether the deletion was successful.
 
 ```php
 $db->drop("DROP `users`;);
@@ -208,6 +211,7 @@ $mysqlVersion = $db->getVersionNumber();
 ```php
 $dbType = $db->getDatabaseType();
 ```
+
 `selectDb($dbname)` : Select the database you want to work this. This is handled in the constructor, but exists to allow you to switch between different databases.
 
 ```php
@@ -225,6 +229,7 @@ $isClosed = $db->close();
 ```
 
 ### Additional Result Set Methods
+
 `seek($result, $offset)` : Sets the internal pointer of the result set to the specified offset.
 
 `numfields()` : Retrieves the number of fields in the given result set.

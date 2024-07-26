@@ -239,7 +239,6 @@ class db
      * Creates a new table in the database by executing an SQL query with optional parameters.
      *
      * @param string $sql The SQL query to execute.
-     * @param array|null $params The parameters to bind to the query (optional).
      * @return bool Returns true if the record was successfully created, false otherwise.
      */
     function create($sql)
@@ -261,10 +260,9 @@ class db
      * Drops a record in the database by executing an SQL query with optional parameters.
      *
      * @param string $sql The SQL query to execute.
-     * @param array|null $params The parameters to bind to the query (optional).
      * @return bool Returns true if the record was successfully dropped, false otherwise.
      */
-    function drop($sql, $params = NULL)
+    function drop($sql)
     {
         $sql = $this->validateSql($sql, __FUNCTION__);
         if (!$sql) {
@@ -272,7 +270,7 @@ class db
             return false;
         }
         $this->sql = $sql;
-        $this->result = $this->exec($this->sql, $params, __FUNCTION__);
+        $this->result = $this->exec($this->sql, NULL, __FUNCTION__);
 
         if ($this->error) {
             return false;
