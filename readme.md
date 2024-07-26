@@ -207,17 +207,20 @@ $db->drop("DROP `users`;);
 $mysqlVersion = $db->getVersionNumber();
 ```
 
+
 `getDatabaseType()` : Return the database type. (MariaDb or Mysql).
 
 ```php
 $dbType = $db->getDatabaseType();
 ```
 
+
 `selectDb($dbname)` : Select the database you want to work this. This is handled in the constructor, but exists to allow you to switch between different databases.
 
 ```php
 $db->selectDb('tempDatabase');
 ```
+
 
 ### Connection Methods
 The connection to the database is created with the instance of the class, so there is no methods for opening a connection.
